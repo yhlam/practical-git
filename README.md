@@ -1,4 +1,4 @@
-practical-git
+Practical Git
 =============
 
 A Git Tutorial

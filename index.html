@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Practical Git</title>
+
+		<meta name="description" content="A tutorial for Git">
+		<meta name="author" content="Hei">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="css/practical_git.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Practical Git</h1>
+					<p>
+						<small>Hei</small>
+					</p>
+					<footer>
+            <img style="border: none" src="img/by-nc-sa.svg" />
+					</footer>
+				</section>
+
+				<section>
+					<h2>Credits</h2>
+          <ul class='credits'>
+            <li>
+            <a href="http://git-scm.com/book">
+              <img src="img/progit.jpg" />
+            </a>
+            <div>Pro Git<br />- Scott Chacon</div>
+            </li>
+            <li>
+            <a href="http://nvie.com/posts/a-successful-git-branching-model/">
+              <img src="img/git_branching_model.png" />
+            </a>
+            <div>A successful Git branching model<br />- Vincent Driessen</div>
+            </li>
+          </ul>
+				</section>
+
+				<section>
+					<h1>GIT 101</h1>
+          <h3>The Basics</h3>
+				</section>
+
+				<section>
+          <section>
+            <h2>Why Git?</h2>
+            <blockquote>
+              Source code control the way it was meant to be!
+              <footer>- Linus Torvalds</footer>
+            </blockquote>
+            <iframe width="420" height="315" src="https://www.youtube.com/embed/4XpnKHJAok8" frameborder="0" allowfullscreen></iframe>
+          </section>
+          <section>
+            <h2>Distributed Version Control System</h2>
+            <img src="img/dvcs.png" />
+          </section>
+          <section>
+            <h2>Branch is first class citizens</h2>
+            <img src="img/git_branch.png" />
+          </section>
+          <section>
+            <h2>Security</h2>
+            <img src="img/git_security.png" />
+          </section>
+          <section>
+            <h2>Performance</h2>
+            <img src="img/git_performance.gif" height="500px" />
+            <footer>
+              <a href="https://www.lourdas.name/blog/git-vs-subversion-performance-comparison">
+                <small>Git vs. Subversion: A performance comparison</small>
+              </a>
+            </footer>
+          </section>
+				</section>
+
+				<section>
+          <h2>Create a new repo</h2>
+          <code>git init</code>
+				</section>
+
+				<section>
+          <h2>Clone an existing repo from server</h2>
+          <code>git clone &lt;repo_url&gt;</code>
+				</section>
+
+				<section>
+          <section>
+            <h2>Record changes</h2>
+            <img src="img/git_file_status.png" />
+          </section>
+          <section>
+            <h2>Check status</h2>
+            <code>git status</code>
+            <pre><code>$ git status
+On branch master
+nothing to commit, working directory clean
+$ vim README
+$ git status
+On branch master
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+        README
+
+nothing added to commit but untracked files present (use "git add" to track)</code></pre>
+          </section>
+          <section>
+            <h2>Add file to staging area</h2>
+            <code>git add &lt;file_path_or_glob&gt;</code>
+            <pre><code>$ git add README
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+        new file:   README</code></pre>
+          </section>
+          <section>
+            <h2>Commit</h2>
+            <code>git commit</code>
+          </section>
+				</section>
+
+        <section>
+          <section>
+            <h2>View History</h2>
+            <code>git log --oneline --graph --all</code>
+            <pre><code>$ git log --oneline --graph --all
+* 0fb3281 Added a proposal on database schema
+* 1e24ffb Added sphinx documentation
+* b0f364c Added requirements for third-party dependencies
+* d432bb1 Fixed typo on get_childern and build_tree
+* 5fff5dc Use serializer to render section list response
+* ebeefd9 Authenticate with JSON Web Token
+* 5e4cd8e fixed create page radio button
+* 8d5961a added radio button for privacy setting in create page
+* e4f47ee Added fake fork
+* bc1e57a Added funny story
+* 69c438c Added some fake books
+* ffe08b6 Added text editor
+* abcd5db added projectservice
+*   12e0a7c Merge branch 'master' of github.com:williampuk/negative-time
+|\
+| * b44e78f Added home redirect
+* | d94d893 changed manage page
+|/
+* 00a326e Added summary for project
+* d6d32d9 Added user reterive view
+* ae70965 Fixed not sitting cookies on login
+* e05f844 Added list sections API
+* be9b39e add manage tab
+* 5ca7589 add create tab template
+* bcf3392 Restructured folders and files
+* e6495f4 discover page with 3x3 grid layout
+* 4b0e9c1 Added directive for enter key for login
+* 3713294 changed the style and changed the form ajax post
+* 57bb48f Added real login views
+| * e2ca6fb add create tab template
+| * 023f5cc discover page with 3x3 grid layout
+| * 29eedeb changed the style and changed the form ajax post
+| * 6489da4 changed again params to test login
+| * 4dd135c changed params to test login:
+| * 3a0bc65 Added real login views
+|/
+* 237441c Added user sign in
+* 3be7fe2 full webapp structure
+* 827d034 Added list projects API
+* b6500dd Added create project API
+* 0865edd Added login api
+* 3a294ff Added static dirs
+* 21d0eb5 Added static files
+* 61c780b Base Django project
+* 78a4291 Initial commit</code></pre>
+          </section>
+          <section>
+            <h2>Tips</h2>
+            <small>
+              <code>git config --global alias.gr "log --graph --all
+                --format=format:'%C(bold blue)%h%C(reset) - %C(bold
+                green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)—
+                %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit
+                --date=relative"
+              </code>
+            </small>
+            <pre><code>$ git gr
+* 0fb3281 - (10 weeks ago) Added a proposal on database schema — Hei (origin/db_schema)
+* 1e24ffb - (10 weeks ago) Added sphinx documentation — Hei (HEAD, origin/master, origin/HEAD, master)
+* b0f364c - (2 months ago) Added requirements for third-party dependencies — Hei
+* d432bb1 - (2 months ago) Fixed typo on get_childern and build_tree — Hei
+* 5fff5dc - (2 months ago) Use serializer to render section list response — Hei
+* ebeefd9 - (2 months ago) Authenticate with JSON Web Token — Hei
+* 5e4cd8e - (3 months ago) fixed create page radio button — William Puk
+* 8d5961a - (3 months ago) added radio button for privacy setting in create page — William Puk
+* e4f47ee - (3 months ago) Added fake fork — Hei
+* bc1e57a - (3 months ago) Added funny story — Hei
+* 69c438c - (3 months ago) Added some fake books — Hei
+* ffe08b6 - (3 months ago) Added text editor — Hei
+* abcd5db - (3 months ago) added projectservice — William Puk
+*   12e0a7c - (3 months ago) Merge branch 'master' of github.com:williampuk/negative-time — William Puk
+|\
+| * b44e78f - (3 months ago) Added home redirect — Hei
+* | d94d893 - (3 months ago) changed manage page — William Puk
+|/
+* 00a326e - (3 months ago) Added summary for project — Hei
+* d6d32d9 - (3 months ago) Added user reterive view — Hei
+* ae70965 - (3 months ago) Fixed not sitting cookies on login — Hei
+* e05f844 - (3 months ago) Added list sections API — Hei
+* be9b39e - (3 months ago) add manage tab — David (origin/manage)
+* 5ca7589 - (3 months ago) add create tab template — David
+* bcf3392 - (3 months ago) Restructured folders and files — William Puk
+* e6495f4 - (3 months ago) discover page with 3x3 grid layout — David
+* 4b0e9c1 - (3 months ago) Added directive for enter key for login — William Puk
+* 3713294 - (3 months ago) changed the style and changed the form ajax post — William Puk
+* 57bb48f - (3 months ago) Added real login views — Hei
+| * e2ca6fb - (3 months ago) add create tab template — David (origin/create)
+| * 023f5cc - (3 months ago) discover page with 3x3 grid layout — David (origin/discover)
+| * 29eedeb - (3 months ago) changed the style and changed the form ajax post — William Puk
+| * 6489da4 - (3 months ago) changed again params to test login — William Puk
+| * 4dd135c - (3 months ago) changed params to test login: — William Puk
+| * 3a0bc65 - (3 months ago) Added real login views — Hei
+|/
+* 237441c - (3 months ago) Added user sign in — William Puk
+* 3be7fe2 - (3 months ago) full webapp structure — William Puk
+* 827d034 - (3 months ago) Added list projects API — Hei
+* b6500dd - (3 months ago) Added create project API — Hei
+* 0865edd - (3 months ago) Added login api — Hei
+* 3a294ff - (3 months ago) Added static dirs — William Puk
+* 21d0eb5 - (3 months ago) Added static files — William Puk
+* 61c780b - (3 months ago) Base Django project — Hei
+* 78a4291 - (3 months ago) Initial commit — William Puk</code></pre>
+          </section>
+        </section>
+
+				<section>
+          <section>
+            <h2>Branching</h2>
+            <img src="img/git_branch_01.png" />
+          </section>
+          <section>
+            <pre><code>$ git branch testing</code></pre>
+            <p><img src="img/git_branch_02.png" /></p>
+          </section>
+          <section>
+            <p><img src="img/git_branch_03.png" /></p>
+          </section>
+          <section>
+            <pre><code>$ git checkout testing</code></pre>
+            <p><img src="img/git_branch_04.png" /></p>
+          </section>
+          <section>
+            <pre><code>$ vim test.rb
+$ git commit -a -m 'made a change'</code></pre>
+            <p><img src="img/git_branch_05.png" /></p>
+          </section>
+          <section>
+            <pre><code>$ git checkout master</code></pre>
+            <p><img src="img/git_branch_06.png" /></p>
+          </section>
+          <section>
+            <pre><code>$ vim test.rb
+$ git commit -a -m 'made a change'</code></pre>
+            <p><img src="img/git_branch_07.png" /></p>
+          </section>
+				</section>
+
+				<section>
+          <section>
+            <h2>Merging</h2>
+            <img src="img/git_merge_01.png" />
+          </section>
+          <section>
+            <pre><code>$ git checkout master
+$ git merge hotfix
+Updating f42c576..3a0874c
+Fast-forward
+ README | 1 -
+ 1 file changed, 1 deletion(-)</code></pre>
+            <p><img src="img/git_merge_02.png" /></p>
+            <pre><code>$ git branch -d hotfix
+Deleted branch hotfix (was 3a0874c).</code></pre>
+          </section>
+          <section>
+            <pre><code>$ git checkout iss53
+Switched to branch 'iss53'
+$ vim index.html
+$ git commit -a -m 'finished the new footer [issue 53]'
+[iss53 ad82d7a] finished the new footer [issue 53]
+ 1 file changed, 1 insertion(+)</code></pre>
+            <p><img src="img/git_merge_03.png" /></p>
+          </section>
+          <section>
+            <pre><code>$ git checkout master
+$ git merge iss53
+Auto-merging README
+Merge made by the 'recursive' strategy.
+ README | 1 +
+ 1 file changed, 1 insertion(+)</code></pre>
+            <p><img src="img/git_merge_04.png" /></p>
+          </section>
+          <section>
+            <p><img src="img/git_merge_05.png" /></p>
+            <pre><code>$ git branch -d iss53</code></pre>
+          </section>
+				</section>
+
+        <section>
+          <section>
+            <h2>Remote Branches</h2>
+            <p><img src="img/git_remote_branch_01.png" /></p>
+          </section>
+          <section>
+            <p><img src="img/git_remote_branch_02.png" /></p>
+          </section>
+          <section>
+            <p><img src="img/git_remote_branch_03.png" /></p>
+          </section>
+          <section>
+            <p><img src="img/git_remote_branch_04.png" /></p>
+          </section>
+          <section>
+            <p><img src="img/git_remote_branch_05.png" /></p>
+          </section>
+          <section>
+            <h2>Pushing</h2>
+            <pre><code>$ git push origin serverfix
+Counting objects: 20, done.
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (15/15), 1.74 KiB, done.
+Total 15 (delta 5), reused 0 (delta 0)
+To git@github.com:schacon/simplegit.git
+ * [new branch]      serverfix -&gt; serverfix</code></pre>
+          </section>
+          <section>
+            <pre><code>$ git fetch origin
+remote: Counting objects: 20, done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 5), reused 0 (delta 0)
+Unpacking objects: 100% (15/15), done.
+From git@github.com:schacon/simplegit
+ * [new branch]      serverfix    -&gt; origin/serverfix</code></pre>
+          </section>
+          <section>
+            <pre><code>$ git checkout -b serverfix origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+Switched to a new branch 'serverfix'</code></pre>
+          </section>
+          <section>
+            <h2>Deleting Remote Branch</h2>
+            <pre><code>$ git push origin :serverfix
+To git@github.com:schacon/simplegit.git
+ - [deleted]         serverfix</code></pre>
+          </section>
+        </section>
+
+				<section>
+					<h1>GIT 201</h1>
+          <h3>The Workflow</h3>
+				</section>
+
+				<section>
+					<h2>A successful Git branching model</h2>
+          <div class="branching-model">
+            <img src="img/git_branching_model.png" />
+          </div>
+				</section>
+
+				<section>
+					<h2>Decentralized but centralized</h2>
+          <img src="img/git_branching_model_01.png" />
+				</section>
+
+				<section>
+					<h2>Main branches - master & develop</h2>
+          <img src="img/git_branching_model_02.png" />
+				</section>
+
+				<section>
+          <section>
+          <h2>Feature branches</h2>
+          <div class="table">
+            <div>
+              <div>
+                <img src="img/git_branching_model_03.png"/>
+              </div>
+              <div>
+                <p>May branch off from: develop</p>
+                <p>Must merge back into: develop</p>
+                <p>Branch naming convention: anything except master, develop, release-*, or hotfix-*</p>
+              </div>
+            </div>
+          </div>
+          </section>
+
+          <section>
+            <img src="img/git_branching_model_04.png" />
+          </section>
+				</section>
+
+				<section>
+					<h2>Release Branch</h2>
+          <p>May branch off from: develop</p>
+          <p>Must merge back into: develop and master</p>
+          <p>Branch naming convention: release-*</p>
+				</section>
+
+				<section>
+          <h2>Hotfix branches</h2>
+          <div class="table">
+            <div>
+              <div>
+                <img src="img/git_branching_model_05.png"/>
+              </div>
+              <div>
+                <p>May branch off from: master</p>
+                <p>Must merge back into: develop and master</p>
+                <p>Branch naming convention: hotfix-*</p>
+              </div>
+            </div>
+          </div>
+				</section>
+
+				<section>
+					<h1>GIT 301</h1>
+          <h3>The Advance Features</h3>
+				</section>
+
+				<section>
+					<h2>add --patch</h2>
+				</section>
+
+        <section>
+          <h2>Change last commit</h2>
+          <code>git commit --amend</code>
+        </section>
+
+        <section>
+          <section>
+            <h2>Reset</h2>
+          </section>
+          <section>
+            <img src="img/git_reset_01.png"/>
+          </section>
+          <section>
+            <img src="img/git_reset_02.png"/>
+          </section>
+          <section>
+            <img src="img/git_reset_03.png"/>
+          </section>
+        </section>
+
+				<section>
+					<h2>Rebase</h2>
+          <pre><code>$ git checkout feature
+$ git rebase master</code></pre>
+          <p><img src="img/git_reset_01.png"/></p>
+				</section>
+
+				<section>
+					<h2>Reflog</h2>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme || 'moon', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

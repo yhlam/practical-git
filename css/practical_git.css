@@ -1,0 +1,37 @@
+.credits {
+    display: table;
+}
+
+.credits li {
+    list-style-type: none;
+    display: table-row;
+}
+
+.credits li > * {
+    display: table-cell;
+    padding: 5px;
+}
+
+.credits img {
+    height: 200px;
+    vertical-align: middle;
+}
+
+.branching-model {
+    max-height: 500px;
+    display: inline-block;
+    overflow: auto;
+}
+
+.table {
+    display: table;
+}
+
+.table > * {
+    display: table-row;
+}
+
+.table > * > * {
+    display: table-cell;
+    vertical-align: middle !important;
+}
